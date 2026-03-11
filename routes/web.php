@@ -12,8 +12,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 // Protected Routes
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Dashboard', [ // We will just point '/' to a dummy Dashboard for now
+        return Inertia::render('Catalog', [ // We will just point '/' to a dummy Dashboard for now
             'user' => request()->user()
         ]);
-    })->name('dashboard');
+    })->name('catalog');
 });
