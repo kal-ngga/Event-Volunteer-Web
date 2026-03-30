@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react';
 
 export default function Navbar({ user }) {
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 w-full px-6 md:px-12 py-4 bg-red-700 border-b border-red-800 flex justify-between items-center overflow-hidden shadow-md">
+        <nav className="fixed top-0 left-0 right-0 z-50 w-full px-6 md:px-12 py-4 bg-purple-700 border-b border-purple-800 flex justify-between items-center overflow-hidden shadow-md">
             {/* Background decorative elements */}
             <div className="w-[300px] h-[300px] absolute -right-20 -top-20 opacity-20 bg-white rounded-full blur-3xl pointer-events-none" />
             <div className="w-[300px] h-[300px] absolute -left-20 -top-20 opacity-20 bg-white rounded-full blur-3xl pointer-events-none" />

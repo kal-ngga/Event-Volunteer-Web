@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from '@inertiajs/react';
 
 export default function Card({ 
+    href,
     image = "https://placehold.co/356x307", 
     category = "Mobile App Development", 
     type = "Individu", 
@@ -10,8 +12,10 @@ export default function Card({
     endDate = "30 Nov 2026",
     location = "Kota Administrasi Jakarta Barat"
 }) {
+    const Component = href ? Link : 'div';
+    
     return (
-        <div className="w-full bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col overflow-hidden group">
+        <Component href={href} className="w-full bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col overflow-hidden group block cursor-pointer">
             {/* Image Container */}
             <div className="h-56 w-full relative overflow-hidden bg-gray-100 flex items-center justify-center">
                  {/* Blurred background image for visual effect */}
@@ -69,6 +73,6 @@ export default function Card({
                     </div>
                 </div>
             </div>
-        </div>
+        </Component>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm, Head } from '@inertiajs/react';
+import { Link, useForm, Head } from '@inertiajs/react';
 
 export default function Login({ nama }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -13,16 +13,16 @@ export default function Login({ nama }) {
     };
 
     return (
-        <div className="w-screen min-h-screen bg-red-500 overflow-hidden flex items-center justify-center font-['TT_Commons']">
+        <div className="w-screen min-h-screen bg-purple-500 overflow-hidden flex items-center justify-center font-['TT_Commons']">
             <Head title="Login" />
 
             {/* Top Navigation */}
             <div className="absolute top-6 left-6 flex items-center gap-2">
-                <span className="text-white text-xl font-bold tracking-wide">Voluntree</span>
+                <span className="text-white text-3xl font-bold tracking-wide">Voluntree</span>
             </div>
 
             <div className="hidden md:flex absolute top-6 right-6 items-center gap-5">
-                <button className="bg-white/10 text-white text-sm font-medium px-4 py-1.5 rounded-full hover:bg-white/20 transition">Sign In</button>
+                <Link href="/register" className="bg-white/20 text-white text-m font-medium px-6 py-2 rounded-full hover:bg-white/100 transition">Register your account here</Link>
             </div>
 
             {/* Login Card */}
@@ -91,7 +91,7 @@ export default function Login({ nama }) {
                         disabled={processing}
                         className="w-full bg-zinc-900 text-white font-semibold rounded-xl py-3 hover:bg-zinc-800 transition-colors disabled:opacity-50 mt-2 text-[15px]"
                     >
-                        {processing ? 'Connecting...' : 'Continue with Email'}
+                        {processing ? 'Connecting...' : 'Log In Now'}
                     </button>
                 </form>
 
