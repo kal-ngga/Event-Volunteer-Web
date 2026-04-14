@@ -55,7 +55,7 @@ Follow these steps to set up the project locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone [<your-repository-url>](https://github.com/kal-ngga/Event-Volunteer-Web)
+   git clone https://github.com/kal-ngga/Event-Volunteer-Web
    cd web-volunteer
    ```
 
