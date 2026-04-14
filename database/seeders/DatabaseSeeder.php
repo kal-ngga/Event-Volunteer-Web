@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Volunteer Sosial', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
-        // 4. Insert Events
+        // 4. Insert Events (1 gratis + 1 berbayar)
         DB::table('events')->insert([
             [
                 'eo_id' => 2, 
@@ -67,6 +67,22 @@ class DatabaseSeeder extends Seeder
                 'end_date' => Carbon::now()->addDays(11),
                 'image_path' => 'events/dummy-banner.jpg', 
                 'status' => 'published',
+                'is_paid' => false,
+                'price' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'eo_id' => 2,
+                'category_id' => 2,
+                'title' => 'Workshop UI/UX Design Bootcamp',
+                'location' => 'Gedung Creativitas Lt. 3',
+                'start_date' => Carbon::now()->addDays(15),
+                'end_date' => Carbon::now()->addDays(16),
+                'image_path' => 'events/dummy-banner-2.jpg',
+                'status' => 'published',
+                'is_paid' => true,
+                'price' => 50000,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -78,6 +94,13 @@ class DatabaseSeeder extends Seeder
                 'event_id' => 1,
                 'description' => 'Seminar nasional membahas masa depan teknologi.',
                 'activity_details' => 'Sesi 1: Keynote Speaker. Sesi 2: Panel Diskusi.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'event_id' => 2,
+                'description' => 'Workshop intensif 2 hari belajar UI/UX dari praktisi industri.',
+                'activity_details' => 'Hari 1: Fundamentals & Figma. Hari 2: Prototyping & User Testing.',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -100,6 +123,22 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Mengecek tiket peserta.',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'event_id' => 2,
+                'division_name' => 'Mentor Pendamping',
+                'quota' => 3,
+                'description' => 'Mendampingi peserta workshop saat sesi praktik.',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'event_id' => 2,
+                'division_name' => 'Logistik & Perlengkapan',
+                'quota' => 2,
+                'description' => 'Menyiapkan peralatan dan konsumsi.',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
 
@@ -110,6 +149,8 @@ class DatabaseSeeder extends Seeder
                 'event_id' => 1, 
                 'division_id' => 1, 
                 'status' => 'pending',
+                'payment_status' => 'free',
+                'payment_token' => null,
                 'applied_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -33,7 +33,14 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            $user = Auth::user();
+
+            // Admin & EO → Dashboard, Customer/Volunteer → Catalog
+            if ($user->role_id == 1 || $user->role_id == 2) {
+                return redirect('/dashboard');
+            }
+
+            return redirect('/');
         }
 
         return back()->withErrors([
@@ -55,9 +62,9 @@ class AuthController extends Controller
     }
 
     public function showRegister()
-        {
-            return Inertia::render('Register'); // Memanggil file Register.jsx di React
-        }
+    {
+        return Inertia::render('Register'); // Memanggil file Register.jsx di React
+    }
 
     public function processRegister(Request $request)
     {
@@ -81,6 +88,9 @@ class AuthController extends Controller
         Auth::login($user);
 
         // 4. Arahkan ke halaman utama atau dashboard
+        if ($user->role_id == 2) {
+            return redirect('/dashboard')->with('success', 'Registrasi berhasil!');
+        }
         return redirect('/')->with('success', 'Registrasi berhasil!');
-    } 
+    }
 }

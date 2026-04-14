@@ -1,7 +1,12 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 
 export default function Navbar({ user }) {
+    const handleLogout = (e) => {
+        e.preventDefault();
+        router.post('/logout');
+    };
+
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 w-full px-6 md:px-12 py-4 bg-purple-700 border-b border-purple-800 flex justify-between items-center overflow-hidden shadow-md">
             {/* Background decorative elements */}
@@ -10,7 +15,7 @@ export default function Navbar({ user }) {
             
             {/* Logo Area */}
             <div className="relative z-10 flex items-center">
-                <Link href="/dashboard" className="text-white text-2xl font-bold font-['TT_Commons'] tracking-wide">
+                <Link href={user?.role_id === 1 || user?.role_id === 2 ? "/dashboard" : "/"} className="text-white text-2xl font-bold font-['TT_Commons'] tracking-wide">
                     Voluntree.org
                 </Link>
             </div>
@@ -34,9 +39,23 @@ export default function Navbar({ user }) {
                     <div className="hidden md:block text-white">
                         <div className="font-medium text-sm font-['TT_Commons'] leading-tight">{user?.name || 'Guest'}</div>
                         <div className="text-xs opacity-80 font-['TT_Commons']">{user?.email || 'Welcome'}</div>
+                        {user?.role_id === 3 && (
+                            <Link href="/profile" className="text-xs text-white hover:text-purple-200 mt-1 font-semibold underline underline-offset-2">
+                                Edit Profile
+                            </Link>
+                        )}
                     </div>
                 </div>
+
+                {/* Logout Button */}
+                <button 
+                    onClick={handleLogout}
+                    className="px-4 py-2 bg-white/15 hover:bg-white/25 text-white text-sm font-medium rounded-lg transition-colors border border-white/20"
+                >
+                    Log Out
+                </button>
             </div>
         </nav>
     );
 }
+

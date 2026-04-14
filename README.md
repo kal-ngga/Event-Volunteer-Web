@@ -1,59 +1,122 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Voluntree
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Voluntree is a comprehensive web-based platform built with Laravel, React (via Inertia.js), and Tailwind CSS designed to bridge the gap between Event Organizers (EO) and Volunteers. It simplifies the process of event publishing, volunteer recruitment, profile management, and payment processing for paid volunteer events.
 
-## About Laravel
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) 
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) 
+![Inertia.js](https://img.shields.io/badge/Inertia.js-9553E9?style=for-the-badge&logo=inertia&logoColor=white) 
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Midtrans](https://img.shields.io/badge/Midtrans-000000?style=for-the-badge)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. 👥 Multi-Role Architecture
+The system supports three distinct user roles with dedicated interfaces and permissions:
+- **Admin**: Oversees the entire platform. Approves/rejects event drafts published by Event Organizers.
+- **Event Organizer (EO)**: Creates new events (free or paid), manages event divisions/quotas, and reviews volunteer applicants.
+- **Volunteer**: Browses the event catalog, manages their interactive profile (Bio, CV, Portfolio), and applies to events.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Integrated Payment Gateway (Midtrans)
+For events that require registration fees, Voluntree is fully integrated with **Midtrans**:
+- **Snap Token Popup**: Volunteers can instantly securely pay via GoPay, QRIS, Bank Transfers, etc. within the application without being redirected.
+- **Automated Webhooks**: Background integration automatically verifies real-time payment success (Settlement) and updates the application status to `Paid`.
+- **Cancellation**: Volunteers can seamlessly cancel applications stuck in the `Pending payment` status without database locking issues.
 
-## Learning Laravel
+### 3. Advanced Applicant Tracking & Management
+Event Organizers have access to a rich CRM-like dashboard for their events:
+- View comprehensive applicant profiles including dynamically generated avatars, background bios, downloaded CVs, and Portfolio links.
+- Interactive **Accept/Reject** workflows ensuring only volunteers who have settled their payments can be evaluated.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 4. Volunteer Dashboard & Profiles
+Volunteers have their own personalized hub to:
+- Track the status of their event applications (e.g. *Menunggu Review*, *Diterima*, *Ditolak*).
+- Upload and manage resumes/CV files natively hosted on the server.
+- Present their portfolios to stand out for elite events.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tech Stack
 
-## Laravel Sponsors
+- **Backend Context:** [Laravel 11.x](https://laravel.com/)
+- **Frontend Engine:** [React 18](https://reactjs.org/) + [Inertia.js](https://inertiajs.com/)
+- **Styling UI:** [Tailwind CSS](https://tailwindcss.com/)
+- **Database:** MySQL
+- **Payments:** Midtrans API SDK
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Getting Started
 
-### Premium Partners
+Follow these steps to set up the project locally:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Prerequisites
+- PHP 8.2+
+- Composer
+- Node.js & npm
+- MySQL
 
-## Contributing
+### Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repository-url>
+   cd web-volunteer
+   ```
 
-## Code of Conduct
+2. **Install PHP and Node dependencies:**
+   ```bash
+   composer install
+   npm install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Environment Setup:**
+   Copy the example `.env` file and generate a Laravel application key.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+4. **Database configuration:**
+   Open `.env` and adjust the database environment variables to match your local MySQL configuration:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_database_user
+   DB_PASSWORD=your_database_password
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **Midtrans Configuration:**
+   Add your Midtrans API credentials (from your Midtrans Sandbox account) to the `.env` file:
+   ```env
+   MIDTRANS_MERCHANT_ID=your_merchant_id
+   MIDTRANS_CLIENT_KEY=your_client_key
+   MIDTRANS_SERVER_KEY=your_server_key
+   MIDTRANS_IS_PRODUCTION=false
+   ```
+
+6. **Run Migrations & Link Storage:**
+   Initialize the database schema and expose the local storage for CV uploads to the public directory:
+   ```bash
+   php artisan migrate
+   php artisan storage:link
+   ```
+
+7. **Compile Frontend & Start Server:**
+   You will need to run two terminal processes simultaneously.
+   
+   To compile React assets via Vite:
+   ```bash
+   npm run dev
+   ```
+
+   To spin up the local Laravel PHP server:
+   ```bash
+   php artisan serve
+   ```
+
+8. *(Optional)* **Webhook Tunnelling:**
+   If you wish to test the end-to-end Midtrans payment flow on localhost, run Ngrok to tunnel your local server and place the Ngrok URL into your Midtrans Dashboard Webhook settings (`/api/midtrans-callback`):
+   ```bash
+   ngrok http 8000
+   ```
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This application is open-source software licensed under the MIT license.

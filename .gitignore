@@ -22,3 +22,13 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Databases
+/database/*.sqlite
+/database/*.sqlite3
+/database/*.sqlite-journal
+
+# Compiled React/Vue components (if any backup)
+npm-debug.log
+yarn-error.log
+package-lock.json.backup
