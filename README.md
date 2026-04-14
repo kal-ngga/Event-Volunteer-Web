@@ -10,7 +10,7 @@ Voluntree is a comprehensive web-based platform built with Laravel, React (via I
 
 ## Key Features
 
-### 1. 👥 Multi-Role Architecture
+### 1. Multi-Role Architecture
 The system supports three distinct user roles with dedicated interfaces and permissions:
 - **Admin**: Oversees the entire platform. Approves/rejects event drafts published by Event Organizers.
 - **Event Organizer (EO)**: Creates new events (free or paid), manages event divisions/quotas, and reviews volunteer applicants.
