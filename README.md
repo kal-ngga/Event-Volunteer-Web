@@ -35,7 +35,7 @@ Volunteers have their own personalized hub to:
 
 ## Tech Stack
 
-- **Backend Context:** [Laravel 11.x](https://laravel.com/)
+- **Backend Context:** [Laravel 12.53.0](https://laravel.com/)
 - **Frontend Engine:** [React 18](https://reactjs.org/) + [Inertia.js](https://inertiajs.com/)
 - **Styling UI:** [Tailwind CSS](https://tailwindcss.com/)
 - **Database:** MySQL
