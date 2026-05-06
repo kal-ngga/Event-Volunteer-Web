@@ -10,7 +10,7 @@ Voluntree is a comprehensive web-based platform built with Laravel, React (via I
 
 ## Key Features
 
-### 1. 👥 Multi-Role Architecture
+### 1. Multi-Role Architecture
 The system supports three distinct user roles with dedicated interfaces and permissions:
 - **Admin**: Oversees the entire platform. Approves/rejects event drafts published by Event Organizers.
 - **Event Organizer (EO)**: Creates new events (free or paid), manages event divisions/quotas, and reviews volunteer applicants.
@@ -35,7 +35,7 @@ Volunteers have their own personalized hub to:
 
 ## Tech Stack
 
-- **Backend Context:** [Laravel 11.x](https://laravel.com/)
+- **Backend Context:** [Laravel 12.53.0](https://laravel.com/)
 - **Frontend Engine:** [React 18](https://reactjs.org/) + [Inertia.js](https://inertiajs.com/)
 - **Styling UI:** [Tailwind CSS](https://tailwindcss.com/)
 - **Database:** MySQL
@@ -55,7 +55,7 @@ Follow these steps to set up the project locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/kal-ngga/Event-Volunteer-Web
    cd web-volunteer
    ```
 
