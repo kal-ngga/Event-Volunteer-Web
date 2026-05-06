@@ -134,7 +134,7 @@ export default function VolunteerProfile({ user, applications }) {
                                         </label>
                                     </div>
                                     {user.cv_path && !cvFileName && (
-                                        <a href={`/storage/${user.cv_path}`} target="_blank" rel="noreferrer" className="text-purple-600 text-xs inline-block mt-2 hover:underline">
+                                        <a href={`/${user.cv_path}`} target="_blank" rel="noreferrer" className="text-purple-600 text-xs inline-block mt-2 hover:underline">
                                             Lihat CV Saat Ini
                                         </a>
                                     )}

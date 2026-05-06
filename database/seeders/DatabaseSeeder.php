@@ -156,5 +156,8 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now(),
             ]
         ]);
+
+        // 8. Seed 10 tambahan events (5 gratis + 5 berbayar)
+        $this->call(EventSeeder::class);
     }
 }

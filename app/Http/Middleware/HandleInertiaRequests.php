@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -37,7 +38,21 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+                'snap_token' => $request->session()->get('snap_token'),
+            ],
+            'notifications' => function () use ($request) {
+                if ($request->user()) {
+                    return DB::table('notifications')
+                        ->where('user_id', $request->user()->id)
+                        ->orderBy('created_at', 'desc')
+                        ->limit(20)
+                        ->get();
+                }
+                return [];
+            },
         ];
     }
 }

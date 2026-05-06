@@ -60,8 +60,10 @@ class ProfileController extends Controller
             }
 
             // Store newly uploaded CV
-            $path = $request->file('cv_file')->store('cvs', 'public');
-            $updateData['cv_path'] = $path;
+            $file = $request->file('cv_file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('cv'), $filename);
+            $updateData['cv_path'] = 'cv/' . $filename;
         }
 
         DB::table('users')->where('id', $user->id)->update($updateData);

@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/Component/Navbar';
 import { router, useForm } from '@inertiajs/react';
 
 export default function AdminDashboard({ user, events }) {
     const { put } = useForm();
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredEvents = events.filter(event => 
+        event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.eo_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        event.category_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const handleApprove = (eventId) => {
         if (confirm('Are you sure you want to approve this event? It will be published to the catalog.')) {
@@ -23,7 +30,7 @@ export default function AdminDashboard({ user, events }) {
 
     return (
         <div className="min-h-screen bg-gray-50 font-['TT_Commons']">
-            <Navbar user={user} />
+            <Navbar user={user} onSearch={setSearchQuery} searchPlaceholder="Cari event, EO, atau kategori..." />
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 w-full">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 pb-5 border-b border-gray-200">
@@ -66,14 +73,14 @@ export default function AdminDashboard({ user, events }) {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {events.length === 0 ? (
+                                {filteredEvents.length === 0 ? (
                                     <tr>
                                         <td colSpan="7" className="px-6 py-8 text-center text-gray-500">
-                                            No events found.
+                                            No events found matching your search.
                                         </td>
                                     </tr>
                                 ) : (
-                                    events.map((event) => (
+                                    filteredEvents.map((event) => (
                                         <tr key={event.id} className="hover:bg-gray-50 transition-colors">
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-sm font-semibold text-gray-900">{event.title}</div>

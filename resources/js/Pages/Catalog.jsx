@@ -18,30 +18,71 @@ export default function Dashboard({ user, events = [] }) {
         return new Date(dateString).toLocaleDateString('id-ID', options);
     };
 
+    // Dynamically retrieve unique categories from the passed events
+    const eventCategories = [...new Set(events.filter(e => e.category_name).map(e => e.category_name))];
+    const categories = ['All', ...eventCategories.length > 0 ? eventCategories : ['Pendidikan', 'Lingkungan', 'Sosial', 'Kesehatan']];
+
+const eventImages = [
+        "Blockchain Blueprint 2026.avif",
+        "Build with TRAE Jakarta.avif",
+        "Build with TRAE Web App.avif",
+        "Capital Circle Discovery Room Tangerang.avif",
+        "Cuan 3 Digit Digital Marketing.avif",
+        "Jakarta 2026 Summit.avif",
+        "Luma Events.avif",
+        "Luma Learn Build Earn.avif",
+        "Master Class Kahf Brotherhood Community.avif",
+        "One ScaleX Connect Indonesia Korea Startup Innovation 2026.avif",
+        "Seedstars Villa Jakarta 2026.avif",
+        "Seismic Solutions Jakarta Workshop.avif",
+        "TERNYATA Showcase.avif"
+    ];
+
+    const getEventImage = (event) => {
+        if (event.image_path) {
+            return `/${event.image_path}`;
+        }
+        return `/images/events/${eventImages[event.id % eventImages.length]}`;
+    };
+
     return (
-        <div className="min-h-screen bg-gray-50 font-['TT_Commons']">
+        <div className="min-h-screen bg-transparent font-['TT_Commons']">
             <Head title="Dashboard" />
-            <Navbar user={user} />
+            <Navbar user={user} searchPlaceholder="Cari acara relawan..." />
 
             {/* Konten Utama Container */}
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 w-full">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 pb-5 border-b border-gray-200">
-                    <div>
-                        <h1 className="text-3xl font-bold text-gray-900 leading-tight">
-                            Dashboard Relawan
+                {/* Header Section */}
+                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-10 pb-8 relative rounded-2xl bg-gradient-to-r from-purple-100/60 via-purple-50/30 to-transparent p-6 -mx-6 md:mx-0">
+                    <div className="max-w-2xl">
+                        <div className="flex items-center gap-2 mb-4">
+                            <span className="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+                            <span className="text-sm text-purple-800 font-medium tracking-wide uppercase">Banyak Kegiatan Menunggumu!</span>
+                        </div>
+                        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4 tracking-tight">
+                            Jadilah Agen Perubahan,<br className="hidden md:block" /> Mulai Langkah Kebaikanmu
                         </h1>
-                        <p className="mt-2 text-md text-gray-600">
-                            Selamat datang kembali, <span className="font-semibold text-gray-800">{user?.name || 'User'}</span>! Temukan berbagai kegiatan relawan terbaru di bawah ini.
+                        <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                            Temukan berbagai misi sosial, lingkungan, dan kemanusiaan. Berikan dampak positif langsung ke masyarakat melalui platform Voluntree.org.
                         </p>
                     </div>
-                    <form onSubmit={handleLogout} className="mt-6 md:mt-0 flex-shrink-0">
-                        <button
-                            type="submit"
-                            className="inline-flex items-center justify-center px-5 py-2.5 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
-                        >
-                            Log Out
-                        </button>
-                    </form>
+
+                    <div className="mt-8 lg:mt-0 flex-shrink-0 lg:max-w-md pt-6">
+                        <div className="flex flex-wrap gap-x-2 gap-y-3 lg:justify-end">
+                            {categories.map((cat, idx) => (
+                                <button 
+                                    key={idx}
+                                    className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm border ${
+                                        idx === 0 
+                                        ? 'bg-purple-700 text-white hover:bg-purple-800 border-transparent' 
+                                        : 'bg-white text-gray-500 hover:text-gray-700 hover:bg-purple-50 border-gray-100 hover:border-purple-200'
+                                    }`}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 {events.length === 0 ? (
@@ -57,7 +98,7 @@ export default function Dashboard({ user, events = [] }) {
                                 title={event.title} 
                                 category={event.category_name} 
                                 type="Volunteer" // Tipe didefaultkan Volunteer karena tidak ada spesifik "Individu/Kelompok" di DB events
-                                image={`https://placehold.co/400x300/4CAF50/FFFFFF?text=${encodeURIComponent(event.category_name)}`}
+                                image={getEventImage(event)}
                                 location={event.location}
                                 startDate={formatDate(event.start_date)}
                                 endDate={formatDate(event.end_date)}
